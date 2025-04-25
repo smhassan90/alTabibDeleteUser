@@ -18,6 +18,8 @@ export default function Deleteuser() {
       );
       if (response.status === 200) {
         alert("Account deleted successfully.");
+        setUsername("")
+        setPassword("")
       } else {
         alert("Failed to delete account.");
       }
