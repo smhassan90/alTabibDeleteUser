@@ -8,12 +8,10 @@ export default function Deleteuser() {
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
-    console.log(username)
-    console.log(password)
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://altabibserver.fynals.com:8080/tabib/deleteUser",
+        "/api/deleteUser",
         {
             username, password
         }
