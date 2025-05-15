@@ -42,7 +42,7 @@ export default function Deleteuser() {
         setPassword("")
         setErrors({ username: "", password: "" });
       } else {
-        alert("Failed to delete account.");
+        alert("User Name or Password is Incorrect");
       }
     } catch (error) {
       console.error("Delete error:", error);
@@ -153,10 +153,10 @@ export default function Deleteuser() {
           <p className="text-gray-700">
             If you have any questions or need assistance, please contact us at{" "}
             <a
-              href="mailto:support@yourapp.com"
+              href="mailto:dev.fynals@gmail.com"
               className="text-blue-600 hover:underline"
             >
-              support@yourapp.com
+              dev.fynals@gmail.com
             </a>
             .
           </p>
