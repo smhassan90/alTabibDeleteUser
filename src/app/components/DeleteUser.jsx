@@ -6,9 +6,29 @@ import axios from "axios";
 export default function Deleteuser() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({ username: "", password: "" });
+
+    const validate = () => {
+    let valid = true;
+    const newErrors = { username: "", password: "" };
+
+    if (!username.trim()) {
+      newErrors.username = "Username is required.";
+      valid = false;
+    }
+
+    if (!password.trim()) {
+      newErrors.password = "Password is required.";
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validate()) return;
     try {
       const response = await axios.post(
         "/api/deleteUser",
@@ -16,10 +36,11 @@ export default function Deleteuser() {
             username, password
         }
       );
-      if (response.status === 200) {
+      if (response.data.status == 200) {
         alert("Account deleted successfully.");
         setUsername("")
         setPassword("")
+        setErrors({ username: "", password: "" });
       } else {
         alert("Failed to delete account.");
       }
@@ -61,6 +82,9 @@ export default function Deleteuser() {
               onChange={(e) => setUsername(e.target.value)}
               className="border border-gray-300 rounded px-4 py-2 w-full max-w-md focus:border-gray-500 focus:ring-1 focus:ring-gray-500 transition-all"
             />
+            {errors.username && (
+              <p className="text-red-600 text-sm mt-1">{errors.username}</p>
+            )}
           </div>
 
           <div className="mb-4 w-[90%] mx-auto">
@@ -77,6 +101,9 @@ export default function Deleteuser() {
               onChange={(e) => setPassword(e.target.value)}
               className="border border-gray-300 rounded px-4 py-2 w-full max-w-md focus:border-gray-500 focus:ring-1 focus:ring-gray-500 transition-all"
             />
+            {errors.password && (
+              <p className="text-red-600 text-sm mt-1">{errors.password}</p>
+            )}
           </div>
 
           <div className="w-[90%] mx-auto">
